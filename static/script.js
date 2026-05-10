@@ -37,15 +37,15 @@ function makeIcon(marina, isSelected) {
         return L.divIcon({
             className: '',
             html: `<div class="map-pin-featured ${isSelected ? 'map-pin-selected' : ''}">⭐</div>`,
-            iconSize: [26, 26],
-            iconAnchor: [13, 13]
+            iconSize: [36, 36],
+            iconAnchor: [18, 18]
         });
     }
     return L.divIcon({
         className: '', 
         html: `<div class="map-pin ${isSelected ? 'map-pin-selected' : ''}"></div>`, 
-        iconSize: [14,14], 
-        iconAnchor: [7,7]
+        iconSize: [22,22], 
+        iconAnchor: [11,11]
     });
 }
 
@@ -214,8 +214,59 @@ fetch('/api/marinas')
         console.error('Failed to load marina data:', err);
     });
  
-// ── Wire up the filter dropdown 
+//  filter dropdown 
 document.getElementById('filter-select').addEventListener('change', function () {
     applyFilter(this.value);
 });
  
+// ── Search bar logic ──────────────────────────────
+const searchInput  = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', function () {
+    const query = this.value.trim().toLowerCase();
+
+    // Hide dropdown if empty
+    if (!query) {
+        searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
+        return;
+    }
+
+    // Filter marinas by name or lake
+    const matches = allMarinas.filter(m =>
+        m.name.toLowerCase().includes(query) ||
+        m.lake.toLowerCase().includes(query)
+    );
+
+    if (matches.length === 0) {
+        searchResults.innerHTML = '<div class="search-result-item">No marinas found</div>';
+        searchResults.style.display = 'block';
+        return;
+    }
+
+    // Build dropdown results
+    searchResults.innerHTML = matches.map(m => `
+        <div class="search-result-item" onclick="pickResult('${m.name}')">
+            <div>${m.name}</div>
+            <div class="search-result-lake">🌊 ${m.lake}</div>
+        </div>
+    `).join('');
+
+    searchResults.style.display = 'block';
+});
+
+// When a result is clicked — fly to marina and clear search
+function pickResult(name) {
+    selectMarina(name);
+    searchInput.value = '';
+    searchResults.style.display = 'none';
+    searchResults.innerHTML = '';
+}
+
+// Close dropdown if user clicks anywhere else on the page
+document.addEventListener('click', function (e) {
+    if (!document.getElementById('search-container').contains(e.target)) {
+        searchResults.style.display = 'none';
+    }
+});

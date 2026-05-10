@@ -16,8 +16,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <!-- ── Search Bar ────────────────────────────────── -->
+<div id="search-container">
+    <input 
+        type="text" 
+        id="search-input" 
+        placeholder="🔍 Search marinas..."
+        autocomplete="off"
+    />
+    <div id="search-results"></div>
+</div>
 
-    <!-- ── Sidebar ─────────────────────────────────── -->
+    <!-- ── Sidebar  -->
     <div id="sidebar">
 
         <!-- Header -->

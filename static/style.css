@@ -152,7 +152,7 @@ body, html{
 
 .marina-card:hover {
     border-color: var(--navy-mid);
-    box-shadow: 0px 3px 14px rgba(11, 37,69, 0.13); /* might later change to */
+    box-shadow: 0px 3px 14px rgba(11, 37,69, 0.13); 
 }
 
 .marina-card.active {
@@ -343,12 +343,12 @@ body, html{
  
 /* ── Map pin styles  */
 .map-pin {
-    width: 14px;
-    height: 14px;
+    width: 22px;
+    height: 22px;
     background: var(--navy);
-    border: 2.5px solid white;
+    border: 3px solid white;
     border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
     cursor: pointer;
 }
 
@@ -400,4 +400,63 @@ body, html{
     font-size: 11px;
     color: #555;
     margin-bottom: 2px;
+}
+
+#search-container {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480;
+    z-index: 1000;
+}
+
+#search-input{
+    width: 100%;
+    padding: 16px 22px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: white;
+    box-shadow: 0 4px 20px rgba(11, 37, 69, 0.2);
+    outline: none;
+    transition: box-shadow 0.15s;
+}
+
+#search-input:focus {
+    box-shadow: 0 4px 24px rgba(11, 37, 69, 0.35);
+}
+
+#search-results {
+    background: white;
+    border-radius: 12px;
+    margin-top: 6px;
+    box-shadow: 0 4px 20px rgba(11, 37, 69, 0.15);
+    overflow: hidden;
+    display: none;
+}
+
+.search-result-item {
+    padding: 11px 18px;
+    font-size: 13px;
+    color: var(--navy);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: var(--bg);
+}
+
+.search-result-lake {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
 }
