@@ -12,7 +12,7 @@ def load_marinas():
         reader = csv.DictReader(f)
         for row in reader:
             # Convert every value to a plain string so JSON can handle it
-            clean = {k: (v if v is not None else '') for k, v in row.items()}
+            clean = {k: (v if v is not None else '') for k, v in row.items() if k is not None}
             # Skip rows with missing coordinates
             if not clean.get('lat') or not clean.get('lng'):
                 continue

@@ -49,11 +49,11 @@ function makeIcon(marina, isSelected) {
     });
 }
 
-function badge (val) {
-    if (val === 'yes') return '<span class="badge-yes">✓</span>';
-    if (val === 'no') return '<span class="badge-no">✗</span>';
+function badge(val) {
+    const v = (val || '').trim();
+    if (v === 'Yes') return '<span class="badge-yes">✓</span>';
+    if (v === 'No')  return '<span class="badge-no">✗</span>';
     return '<span class="badge-na">—</span>';
-
 }
 
 function chip(val, label) {
