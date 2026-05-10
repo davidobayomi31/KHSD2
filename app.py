@@ -9,8 +9,8 @@ def load_marina():
     
     csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'simcoe_marinas.csv')
     
-    with open (encodig = 'utf-8') as f:
-        reader = csv.dictReader(f)
+    with open(csv_path, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
         for row in reader:
             row['lat'] = float(row['lat'])
             row['lng'] = float(row['lng'])
