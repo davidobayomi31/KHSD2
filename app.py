@@ -4,7 +4,7 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-def load_marina():
+def load_marinas():
     marinas = []
     
     csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'simcoe_marinas.csv')
@@ -22,8 +22,8 @@ def home():
     return render_template('index.html')
 
 @app.route('/api/marinas')
-def get_marina():
-    return jsonify(load_marina())
+def get_marinas():
+    return jsonify(load_marinas())
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
