@@ -9,11 +9,11 @@
     --text: #1a1a2e;
     --muted: #6b7a99;
     --yes-bg: #d4f0e0;
-    --yes-txt: #d4f0e0;
+    --yes-txt: #145c38;
     --no-bg: #fde8e8;
     --no-txt: #8b1a1a;
     --na-bg: #ebebeb;
-    --na-text: #555;
+    --na-txt: #555;
 
 } 
 
@@ -46,7 +46,7 @@ body, html{
     top: 16px;
     left: 16px;
     width: 300px;
-    max-height: calc(100vh-32px);
+    max-height: calc(100vh - 32px);
     background: var(--white); /* this might change */
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(11, 37, 69, 0.2);
@@ -80,7 +80,7 @@ body, html{
 }
 
 #region {
-    font-size: 10;
+    font-size: 10px;
     color: rgba(255, 255, 255, 0.5);
     margin-top: 3px;
     letter-spacing: 0.6px;
@@ -111,7 +111,7 @@ body, html{
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
     color: var(--text);
-    background: var(--bg)l;
+    background: var(--bg);
     cursor: pointer;
     outline: none;
     transition: border-color 0.15s;
@@ -122,7 +122,7 @@ body, html{
 
 }
 
-#count_label {
+#count-label {
     font-size: 11px;
     color: var(--muted);
     padding: 10px 16px 4px;
@@ -147,7 +147,7 @@ body, html{
     padding: 12px 14px;
     margin-bottom: 8px;
     cursor: pointer;
-    transition: box-shadow 0.15s, border-color 0.15s, transform 0,.15s;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
 }
 
 .marina-card:hover {
@@ -157,10 +157,10 @@ body, html{
 
 .marina-card.active {
     border-color: var(--navy);
-    box-shadow: 0 3px 14px rbga (11, 37,69, 0.13);
+    box-shadow: 0 3px 14px rgba(11, 37,69, 0.13);
 }
 
-.featured_card {
+.featured-card {
     background: #fffbee; 
     border-color: var(--gold);
 }
@@ -378,7 +378,7 @@ body, html{
     padding: 0;
 }
 
-.leaflet-popup-context {
+.leaflet-popup-content{
     margin: 14px 16px;
     font-family: 'DM sans', sans-serif;
 }

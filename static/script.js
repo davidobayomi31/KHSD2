@@ -19,8 +19,8 @@ const AMENITIES = {
     bait_and_tackle:    '🎣 Bait & Tackle',
 }
 // Initialize map
-const map = l.map('map', {zoomControl: false}).setView([44.67, -79.38], 11);
-L.control.zoom({position: 'buttomright' }).addTO(map);
+const map = L.map('map', {zoomControl: false}).setView([44.67, -79.38], 11);
+L.control.zoom({position: 'bottomright'}).addTo(map);
 // add zoom
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -28,7 +28,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let allMarinas = [];
-let allEntires = [];
+let allEntries = []; 
 let selectedName = null;
 
 function makeIcon(marina, isSelected) {
@@ -42,16 +42,16 @@ function makeIcon(marina, isSelected) {
         });
     }
     return L.divIcon({
-        classname: '', 
+        className: '', 
         html: `<div class="map-pin ${isSelected ? 'map-pin-selected' : ''}"></div>`, 
-        iconsize: [14,14], 
-        ionAnchor: [7,7]
+        iconSize: [14,14], 
+        iconAnchor: [7,7]
     });
 }
 
 function badge (val) {
-    if (val == 'yes') return '<span class="badge-yes">✓</span>';
-    if (vall == 'no') return '<span class="badge-no">✗</span>';
+    if (val === 'yes') return '<span class="badge-yes">✓</span>';
+    if (val === 'no') return '<span class="badge-no">✗</span>';
     return '<span class="badge-na">—</span>';
 
 }
