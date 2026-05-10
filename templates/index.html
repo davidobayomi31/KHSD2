@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simcoe Marina Finder</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS (the map library) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <!-- Our custom CSS — Flask serves this from the static folder -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- ── Sidebar ─────────────────────────────────── -->
+    <div id="sidebar">
+
+        <!-- Header -->
+        <div id="sidebar-header">
+            <span id="logo">⚓</span>
+            <div>
+                <h1>Marina Finder</h1>
+                <p id="region">Simcoe County &amp; Orillia</p>
+            </div>
+        </div>
+
+        <!-- Filter -->
+        <div id="filter-section">
+            <p class="section-label">FILTER BY AMENITY</p>
+            <select id="filter-select">
+                <option value="all">All Marinas</option>
+                <option value="gas">⛽ Gas</option>
+                <option value="pump_out">🚿 Pump-Out</option>
+                <option value="electricity_30amp">⚡ Hydro / Electricity</option>
+                <option value="mechanic_on_site">🔧 Mechanic On Site</option>
+                <option value="marine_store">🏪 Marine Store</option>
+                <option value="launch_ramp">🚤 Launch Ramp</option>
+                <option value="boat_rentals">🛥 Boat Rentals</option>
+                <option value="boat_sales">🚢 Boat Sales</option>
+                <option value="winter_storage">❄️ Winter Storage</option>
+                <option value="on_site_restaurant">🍽 Restaurant</option>
+                <option value="washrooms">🚻 Washrooms</option>
+                <option value="showers">🚿 Showers</option>
+                <option value="wifi">📶 WiFi</option>
+                <option value="pet_friendly">🐾 Pet Friendly</option>
+                <option value="bait_and_tackle">🎣 Bait &amp; Tackle</option>
+            </select>
+        </div>
+
+        <!-- Count -->
+        <p id="count-label">Loading marinas...</p>
+
+        <!-- Marina cards list -->
+        <div id="marina-list"></div>
+
+    </div>
+
+    <!-- ── Map ─────────────────────────────────────── -->
+    <div id="map"></div>
+
+    <!-- ── Detail Panel ────────────────────────────── -->
+    <div id="detail-panel">
+        <div id="detail-content">
+            <p id="detail-placeholder">Click a marina card or map pin to see details</p>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Our custom JS — Flask serves this from the static folder -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
