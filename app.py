@@ -7,7 +7,7 @@ app = Flask(__name__)
 def load_marina():
     marinas = []
     
-    csv_path = open('simco_marina.csv')
+    csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'simcoe_marinas.csv')
     
     with open (encodig = 'utf-8') as f:
         reader = csv.dictReader(f)
@@ -25,7 +25,8 @@ def home():
 def get_marina():
     return jsonify(load_marina())
 
-
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
 
 
 

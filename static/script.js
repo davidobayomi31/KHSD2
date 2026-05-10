@@ -61,7 +61,7 @@ function chip(val, label) {
     return `<span class="${cls}">${label}</span>`;
 }
  
-// ── Build the detail panel for a marina ──────────────
+//  Build the detail panel for a marina 
 function showDetail(marina) {
     const featuredBadge = marina.featured === 'true'
         ? '<span class="detail-featured-badge">⭐ Featured Marina</span><br>' : '';
@@ -88,7 +88,7 @@ function showDetail(marina) {
     `;
 }
  
-// ── Build a sidebar card for a marina ────────────────
+// ── Build a sidebar card for a marina 
 function buildCard(marina) {
     const div = document.createElement('div');
     div.className = `marina-card ${marina.featured === 'true' ? 'featured-card' : ''}`;
@@ -137,7 +137,7 @@ function selectMarina(name) {
     });
 }
  
-// ── Apply the amenity filter ──────────────────────────
+// ── Apply the amenity filter 
 function applyFilter(filterKey) {
     const list = document.getElementById('marina-list');
     list.innerHTML = '';
@@ -175,7 +175,7 @@ function applyFilter(filterKey) {
         `${count} marina${count !== 1 ? 's' : ''} found`;
 }
  
-// ── Fetch data from Flask and set everything up ───────
+// ── Fetch data from Flask and set everything up 
 fetch('/api/marinas')
     .then(response => response.json())
     .then(data => {
@@ -202,7 +202,7 @@ fetch('/api/marinas')
             allEntries.push({ marina, marker });
         });
  
-        // Initial render — show all marinas
+        // show all marinas
         applyFilter('all');
  
         // Auto-select the first featured marina (Blue Beacon)
@@ -214,7 +214,7 @@ fetch('/api/marinas')
         console.error('Failed to load marina data:', err);
     });
  
-// ── Wire up the filter dropdown ───────────────────────
+// ── Wire up the filter dropdown 
 document.getElementById('filter-select').addEventListener('change', function () {
     applyFilter(this.value);
 });
