@@ -460,3 +460,25 @@ body, html{
     color: var(--muted);
     margin-top: 2px;
 }
+
+/* ── Directions button ───────────────────────────── */
+.directions-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #1a56a0;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.15s;
+}
+
+.directions-btn:hover {
+    background: #0b2545;
+}

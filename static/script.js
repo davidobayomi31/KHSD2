@@ -85,6 +85,11 @@ function showDetail(marina) {
             <span>💰 ${marina.price_range || '—'}</span>
         </div>
         <a class="website-btn" href="${marina.website}" target="_blank">🌐 Visit Website</a>
+        <button class="directions-btn" onclick="getDirections(${marina.lat}, ${marina.lng},' ${marina.name}')">
+            🧭 Get Directions
+        </button>
+        <div id = "route-info"></div>
+
     `;
 }
  
@@ -116,7 +121,7 @@ function buildCard(marina) {
     return div;
 }
  
-// ── Select a marina (highlight card, fly map, show detail) ─
+//  Select a marina (highlight card, fly map, show detail) ─
 function selectMarina(name) {
     selectedName = name;
  
@@ -218,7 +223,77 @@ fetch('/api/marinas')
 document.getElementById('filter-select').addEventListener('change', function () {
     applyFilter(this.value);
 });
- 
+
+let routeLayer = null;
+function getDirections(destLat, destLng, marinaName) {
+    const routeInfo = document.getElementById('route-info');
+    routeInfo.innerHTML = '<p stlye="font-size:12px;color:#6b7a99;margin-top:10px;" >Getting your location...</p>';
+
+    // get user's current location
+    if (!navigator.geolocation){
+        routeInfo.innerHTMl = '<p style="font-size:12px;color:#e63946;">Your browser does not support location access.</p>';
+        return;
+    }
+    
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+
+            routeInfo.innerHTML = '<p style="font-size:12px;color:#6b7a99;margin-top:10px;">Calculating route...</p>';
+
+            // Step 2: Call OSRM for the route
+            const url = `https://router.project-osrm.org/route/v1/driving/${userLng},${userLat};${destLng},${destLat}?overview=full&geometries=geojson`;
+
+            fetch(url)
+                .then(r => r.json())
+                .then(data => {
+                    if (!data.routes || data.routes.length === 0) {
+                        routeInfo.innerHTML = '<p style="font-size:12px;color:#e63946;">Could not find a route.</p>';
+                        return;
+                    }
+
+                    const route = data.routes[0];
+                    const distanceKm = (route.distance / 1000).toFixed(1);
+                    const durationMin = Math.round(route.duration / 60);
+                    const hours = Math.floor(durationMin / 60);
+                    const mins = durationMin % 60;
+                    const timeStr = hours > 0 ? `${hours}h ${mins}min` : `${mins} min`;
+
+                    // Step 3: Draw the route on the map
+                    if (routeLayer) map.removeLayer(routeLayer);
+                    routeLayer = L.geoJSON(route.geometry, {
+                        style: {
+                            color: '#1a56a0',
+                            weight: 4,
+                            opacity: 0.8
+                        }
+                    }).addTo(map);
+
+                    // Fit map to show the full route
+                    map.fitBounds(routeLayer.getBounds(), { padding: [40, 40] });
+
+                    // Step 4: Show time and distance
+                    routeInfo.innerHTML = `
+                        <div style="background:#f0f4f8;border-radius:8px;padding:10px;margin-top:10px;font-size:12px;">
+                            <div style="font-weight:600;color:#0b2545;margin-bottom:4px;">🧭 Route to ${marinaName}</div>
+                            <div style="color:#555;">🚗 ${distanceKm} km &nbsp;|&nbsp; ⏱ ${timeStr}</div>
+                        </div>
+                    `;
+                })
+                .catch(() => {
+                    routeInfo.innerHTML = '<p style="font-size:12px;color:#e63946;">Routing service unavailable.</p>';
+                });
+        },
+        function() {
+            routeInfo.innerHTML = '<p style="font-size:12px;color:#e63946;">Location access denied. Please allow location in your browser settings.</p>';
+        }
+    );
+}
+
+
+
+
 // ── Search bar logic ──────────────────────────────
 const searchInput  = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
