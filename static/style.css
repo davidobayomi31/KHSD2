@@ -482,3 +482,90 @@ body, html{
 .directions-btn:hover {
     background: #0b2545;
 }
+/* ── Mobile Layout (screens under 768px) ─────────── */
+@media (max-width: 768px) {
+
+    /* Hide the right detail panel — it shows as a bottom sheet instead */
+    #detail-panel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 55vh;
+        border-radius: 20px 20px 0 0;
+        padding: 16px;
+    }
+
+    /* Shrink the sidebar */
+    #sidebar {
+        top: 10px;
+        left: 10px;
+        width: 200px;
+        max-height: 42vh;
+    }
+
+    /* Make search bar fit the screen */
+    #search-container {
+        width: calc(100% - 230px);
+        left: 220px;
+        transform: none;
+        top: 10px;
+    }
+
+    /* Shrink sidebar header */
+    #sidebar-header h1 {
+        font-size: 14px;
+    }
+
+    #sidebar-header {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    #logo {
+        font-size: 22px;
+    }
+
+    #region {
+        display: none;
+    }
+
+    /* Shrink filter section */
+    #filter-section {
+        padding: 8px 10px;
+    }
+
+    #filter-select {
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    #count-label {
+        font-size: 10px;
+        padding: 6px 10px 2px;
+    }
+
+    /* Smaller marina cards */
+    .marina-card {
+        padding: 8px 10px;
+    }
+
+    .card-name {
+        font-size: 11px;
+    }
+
+    .card-lake, .card-phone {
+        font-size: 10px;
+    }
+
+    .card-chips {
+        display: none;
+    }
+
+    /* Amenity grid two columns on mobile */
+    .amenity-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 8px;
+    }
+}
